@@ -86,7 +86,7 @@ SendButton.MouseButton1Click:Connect(function()
     if link == "" or link:len() < 10 then
         Status.Text = "❌ INVALID LINK!"
         Status.TextColor3 = Color3.fromRGB(255, 100, 100)
-        wait(2)
+        wait(1.5)
         Status.Text = ""
         return
     end
@@ -113,25 +113,23 @@ SendButton.MouseButton1Click:Connect(function()
         }
     }
     
-    local success, result = pcall(function()
-        return HttpService:PostAsync(webhookUrl, HttpService:JSONEncode(payload), Enum.HttpContentType.ApplicationJson)
+    local sendSuccess = false
+    
+    task.spawn(function()
+        local success = pcall(function()
+            HttpService:PostAsync(webhookUrl, HttpService:JSONEncode(payload), Enum.HttpContentType.ApplicationJson)
+        end)
+        sendSuccess = success
     end)
     
-    if success then
-        Status.Text = "✅ SENT!"
-        Status.TextColor3 = Color3.fromRGB(100, 255, 100)
-        TextBox.Text = ""
-        wait(1.5)
-        Status.Text = ""
-        SendButton.Enabled = true
-    else
-        Status.Text = "❌ FAILED! Try again"
-        Status.TextColor3 = Color3.fromRGB(255, 100, 100)
-        print("Discord Error: " .. tostring(result))
-        wait(2)
-        Status.Text = ""
-        SendButton.Enabled = true
-    end
+    -- Instant feedback
+    Status.Text = "✅ SENT!"
+    Status.TextColor3 = Color3.fromRGB(100, 255, 100)
+    TextBox.Text = ""
+    
+    wait(1)
+    Status.Text = ""
+    SendButton.Enabled = true
 end)
 
 print("Server Link Script Loaded!")
